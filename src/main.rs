@@ -4,7 +4,7 @@ mod types;
 use crate::routes::get_router;
 use listenfd::ListenFd;
 use std::net::SocketAddr;
-use tokio::net::TcpListener;
+use tokio::{net::TcpListener, signal};
 use tower_http::{
     services::{ServeDir, ServeFile},
     trace::TraceLayer,
@@ -37,6 +37,31 @@ async fn main() {
         ServeDir::new("client/dist").not_found_service(ServeFile::new("client/dist/index.html"));
     let app = get_router().fallback_service(serve_dir);
     axum::serve(listener, app.layer(TraceLayer::new_for_http()))
+        .with_graceful_shutdown(shutdown_signal())
         .await
         .unwrap();
+}
+
+async fn shutdown_signal() {
+    let ctrl_c = async {
+        signal::ctrl_c()
+            .await
+            .expect("failed to install Ctrl+C handler");
+    };
+
+    #[cfg(unix)]
+    let terminate = async {
+        signal::unix::signal(signal::unix::SignalKind::terminate())
+            .expect("failed to install signal handler")
+            .recv()
+            .await;
+    };
+
+    #[cfg(not(unix))]
+    let terminate = std::future::pending::<()>();
+
+    tokio::select! {
+        _ = ctrl_c => {},
+        _ = terminate => {},
+    }
 }
