@@ -10,6 +10,7 @@ COPY --from=planner /app/recipe.json recipe.json
 RUN cargo chef cook --release --recipe-path recipe.json
 COPY . .
 RUN cargo build --release --bin app
+RUN cd client && npm run build
 
 FROM debian:bookworm-slim AS runtime
 WORKDIR /app
