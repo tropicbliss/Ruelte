@@ -1,8 +1,8 @@
 # Svelte + Rust
 
-# Setup instructions
+## Setup instructions
 
-## Linux / macOS (Bash compatible shell)
+### Linux / macOS (Bash compatible shell)
 ```sh
 cargo install cargo-watch systemfd
 cd client && npm i
@@ -10,7 +10,7 @@ cd ../
 ./watch.sh
 ```
 
-## Windows (PowerShell)
+### Windows (PowerShell)
 ```sh
 cargo install cargo-watch systemfd
 cd client ; npm i
