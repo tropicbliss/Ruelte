@@ -18,3 +18,10 @@ cd ../
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 ./watch.ps1
 ```
+
+### Deploy project to a Docker container
+
+```sh
+cargo install cargo-chef
+cargo chef cook --release --recipe-path recipe.json
+```
