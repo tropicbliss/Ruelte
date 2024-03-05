@@ -24,4 +24,6 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```sh
 cargo install cargo-chef
 cargo chef cook --release --recipe-path recipe.json
+docker build -t your-image-name:tag .
+docker run -p 3000:3000 your-image-name
 ```
