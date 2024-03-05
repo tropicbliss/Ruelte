@@ -18,6 +18,5 @@ RUN cd client && npm i && npm run build
 FROM debian:bookworm-slim AS runtime
 WORKDIR /app
 COPY --from=builder /app/target/release/app /usr/local/bin
-RUN mkdir /usr/local/bin/client
-COPY --from=builder /app/client/dist /usr/local/bin/client
+COPY --from=builder /app/client/dist /usr/local/bin/client/dist
 ENTRYPOINT ["/usr/local/bin/app"]
