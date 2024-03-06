@@ -2,19 +2,13 @@
 
 ## Setup instructions
 
-### Linux / macOS (Bash compatible shell)
-```sh
-cargo install cargo-watch systemfd
-cd client && npm i
-cd ../
-./watch.sh
-```
+### Prerequisites
 
-### Windows (PowerShell)
+- Node 20.x
+- Rust
+
+### Linux / macOS / Windows WSL
 ```sh
-cargo install cargo-watch systemfd
-cd client ; npm i
-cd ../
-Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-./watch.ps1
+just setup
+just watch
 ```
