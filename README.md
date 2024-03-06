@@ -12,5 +12,3 @@
 just setup # initial one time setup
 just watch
 ```
-
-test
