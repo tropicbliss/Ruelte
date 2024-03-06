@@ -9,6 +9,6 @@
 
 ### Linux / macOS / Windows WSL
 ```sh
-just setup
+just setup # initial one time setup
 just watch
 ```
